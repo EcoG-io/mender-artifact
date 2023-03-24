@@ -12,9 +12,9 @@ require (
 	github.com/mendersoftware/progressbar v0.0.3
 	github.com/minio/sha256-simd v1.0.0
 	github.com/pkg/errors v0.9.1
-	github.com/remyoudompheng/go-liblzma v0.0.0-20190506200333-81bf2d431b96
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
+	github.com/ulikunitz/xz v0.5.11
 	github.com/urfave/cli v1.22.12
 	golang.org/x/sys v0.5.0
 	google.golang.org/genproto v0.0.0-20221024183307-1bc688fe9f3e
