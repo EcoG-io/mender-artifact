@@ -11,8 +11,6 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
-//go:build !nolzma && cgo
-// +build !nolzma,cgo
 
 package artifact
 
@@ -23,8 +21,8 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCompressorLzma(t *testing.T) {
-	c := NewCompressorLzma()
+func TestCompressorLzmaWin(t *testing.T) {
+	c := NewCompressorLzmaWin()
 	assert.Equal(t, c.GetFileExtension(), ".xz")
 
 	buf := bytes.NewBuffer(nil)

@@ -11,36 +11,38 @@
 //    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //    See the License for the specific language governing permissions and
 //    limitations under the License.
-//go:build !nolzma && cgo
-// +build !nolzma,cgo
 
 package artifact
 
 import (
 	"io"
 
-	xz "github.com/remyoudompheng/go-liblzma"
+	"github.com/ulikunitz/xz"
 )
 
-type CompressorLzma struct {
+type CompressorLzmaWin struct {
 }
 
-func NewCompressorLzma() Compressor {
-	return &CompressorLzma{}
+func NewCompressorLzmaWin() Compressor {
+	return &CompressorLzmaWin{}
 }
 
-func (c *CompressorLzma) GetFileExtension() string {
+func (c *CompressorLzmaWin) GetFileExtension() string {
 	return ".xz"
 }
 
-func (c *CompressorLzma) NewReader(r io.Reader) (io.ReadCloser, error) {
-	return xz.NewReader(r)
+func (c *CompressorLzmaWin) NewReader(r io.Reader) (io.ReadCloser, error) {
+	rc, err := xz.NewReader(r)
+	if err != nil {
+		return nil, err
+	}
+	return io.NopCloser(rc), nil
 }
 
-func (c *CompressorLzma) NewWriter(w io.Writer) (io.WriteCloser, error) {
-	return xz.NewWriter(w, xz.Level9)
+func (c *CompressorLzmaWin) NewWriter(w io.Writer) (io.WriteCloser, error) {
+	return xz.NewWriter(w)
 }
 
 func init() {
-	RegisterCompressor("lzma", &CompressorLzma{})
+	RegisterCompressor("lzma", &CompressorLzmaWin{})
 }
